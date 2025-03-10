@@ -1,16 +1,27 @@
 const getRequestBody = (req) => {
   return new Promise((resolve, reject) => {
     const bodyParts = [];
-    
+
     req.on('data', (chunk) => {
       bodyParts.push(chunk);
     });
-    
+
     req.on('end', () => {
-      const body = Buffer.concat(bodyParts).toString();
-      resolve(body ? JSON.parse(body) : {});
+      try {
+        const body = Buffer.concat(bodyParts).toString();
+
+        if (!body) {
+          resolve({});
+          return;
+        }
+
+        const parsedBody = JSON.parse(body);
+        resolve(parsedBody);
+      } catch (err) {
+        reject(new Error('Invalid JSON format in request body'));
+      }
     });
-    
+
     req.on('error', (err) => {
       reject(err);
     });

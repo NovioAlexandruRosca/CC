@@ -105,7 +105,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/books/3/recommendations/?genre=true&author=false\n&limit=6",
+					"raw": "{{base_url}}/books/3/recommendations/?genre=false&author=false\n&limit=6",
 					"host": [
 						"{{base_url}}"
 					],
@@ -118,7 +118,7 @@
 					"query": [
 						{
 							"key": "genre",
-							"value": "true"
+							"value": "false"
 						},
 						{
 							"key": "author",
@@ -183,7 +183,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"title\": \"Cele 7 morti ale lui Evelynn HardCastle\",\n  \"author\": \"Luis\",\n  \"genre\": \"Sf\",\n  \"published_year\": 2003,\n  \"isbn\": \"12345678901244\"\n}\n",
+					"raw": "{\n  \"title\": \"Cele 7 morti ale lui Evelynn HardCastle\",\n  \"author\": \"Luis\",\n  \"genre\": \"Sf\",\n  \"published_year\": 2003,\n  \"isbn\": \"12342678901244\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -221,13 +221,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{base_url}}/books/10",
+					"raw": "{{base_url}}/books/3",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"books",
-						"10"
+						"3"
 					]
 				}
 			},
@@ -275,7 +275,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"title\": \"Book2\",\n    \"author\": \"Author2\",\n    \"genre\": \"Comedy\",\n    \"published_year\": 2025,\n    \"isbn\": \"123098421312\"\n}",
+					"raw": "{\n\t\"title\": \"Book2\",\n    \"author\": \"Author2\",\n    \"genre\": \"Comedy\",\n    \"published_year\": 2025,\n    \"isbn\": \"12345678901234\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -665,13 +665,13 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "{{base_url}}/authors/1",
+					"raw": "{{base_url}}/authors/10",
 					"host": [
 						"{{base_url}}"
 					],
 					"path": [
 						"authors",
-						"1"
+						"10"
 					]
 				}
 			},
@@ -761,6 +761,27 @@
 					"path": [
 						"libraries",
 						"1",
+						"stats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get libraries stats",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/libraries/stats",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"libraries",
 						"stats"
 					]
 				}
