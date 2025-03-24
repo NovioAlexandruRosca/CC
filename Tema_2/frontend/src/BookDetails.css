@@ -1,0 +1,198 @@
+/* BookDetails.css */
+
+.book-details {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+.error {
+  color: red;
+}
+
+.back-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.summary-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.summary-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.summary-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.summary {
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.summary h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.summary p {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.details {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.details p {
+  font-size: 16px;
+  color: #333;
+  margin: 10px 0;
+}
+
+.book-coverr {
+  position: absolute;
+  top:210px;
+  right:700px;
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #007bff; /* Blue background */
+  color: white; /* White text */
+  text-decoration: none; /* Remove underline */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.review-link:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.similar-books {
+  margin-top: 20px;
+}
+
+.similar-books h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.similar-books-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.similar-books-list .book {
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.similar-books-list .book h3 {
+  margin-top: 0;
+}
+
+.similar-books-list .book-cover {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.similar-books-dropdown select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.similar-books {
+  margin-top: 20px;
+}
+
+.similar-books h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.similar-books-dropdown select {
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 400px;
+}
+
+.selected-book-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  margin-top: 20px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.selected-book-details h3 {
+  margin-top: 0;
+}
+
+.selected-book-details .book-cover {
+  max-width: 40%;
+  height: auto;
+  border-radius: 4px;
+}
