@@ -1,3 +1,5 @@
+import math
+
 from fastapi import FastAPI, HTTPException
 import requests
 from pydantic import BaseModel
@@ -66,6 +68,34 @@ async def fetch_books(
             raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.get("/fetch-library-books")
+async def fetch_library_books(
+    library_id: int = None,
+    book_id: int = None,
+    author_id: int = None
+):
+    params = {}
+    if library_id:
+        params["library_id"] = library_id
+    if book_id:
+        params["book_id"] = book_id
+    if author_id:
+        params["author_id"] = author_id
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get(
+                "http://localhost:8000/library-books",
+                params=params
+            )
+            response.raise_for_status()
+            return response.json()
+        except httpx.HTTPStatusError as e:
+            raise HTTPException(status_code=e.response.status_code, detail=str(e))
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.post("/add-book")
 async def add_book(book_data: dict):
     if book_data.get("title"):
@@ -88,6 +118,39 @@ async def add_book(book_data: dict):
             )
             response.raise_for_status()
             return response.json()
+        except httpx.HTTPStatusError as e:
+            raise HTTPException(status_code=e.response.status_code, detail=str(e))
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/libraries")
+async def get_libraries(
+        name: str = None,
+        location: str = None,
+        sort: str = None,
+        order: str = "ASC",
+        page: int = 1,
+        limit: int = 10
+):
+    params = {
+        "name": name,
+        "location": location,
+        "sort": sort,
+        "order": order,
+        "page": page,
+        "limit": limit,
+    }
+
+    async with httpx.AsyncClient() as client:
+        try:
+            response = await client.get("http://localhost:8000/libraries", params=params)
+            response.raise_for_status()
+
+            libraries_data = response.json()
+
+            return libraries_data
+
         except httpx.HTTPStatusError as e:
             raise HTTPException(status_code=e.response.status_code, detail=str(e))
         except Exception as e:
@@ -196,13 +259,15 @@ async def get_book(book: BookRequest):
             books.append(book_info)
             if not book.similar:
                 break
-            elif len(books) == 10:
+            elif len(books) == 11:
                 break
 
         return {"books": books}
     except httpx.HTTPStatusError as e:
+        print(e)
         raise HTTPException(status_code=e.response.status_code, detail=str(e))
     except Exception as e:
+        print(e)
         raise HTTPException(status_code=500, detail=str(e))
 
 
@@ -284,16 +349,14 @@ async def get_book_summary(request: BookSummaryRequest):
 @app.get("/api/book-reviews")
 async def get_book_reviews(title: str):
     try:
-        # Call the NY Times API
         async with httpx.AsyncClient() as client:
             response = await client.get(
                 NY_TIMES_API_URL,
                 params={"title": title, "api-key": NY_TIMES_API_KEY},
             )
-            response.raise_for_status()  # Raise an error for bad responses (4xx, 5xx)
+            response.raise_for_status()
             data = response.json()
 
-        # Extract relevant data from the NY Times API response
         reviews = []
         for result in data.get("results", []):
             review = {
